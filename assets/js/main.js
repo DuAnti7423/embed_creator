@@ -21,7 +21,7 @@ if (typeof $discordOutputForm !== 'undefined' && $discordOutputForm.length > 0) 
 };
 
 function addDiscordEmbedFieldForm(updateCode) {
-    let $discordEmbedAddFieldButton = $('#buttonDiscordEmbedAddField1');
+    let $discordEmbedAddFieldButton = $('#buttonDiscordEmbedAddField');
     let newIndex = $('.embed-field').length;
     let $newElement = $(
         '<div>' +
@@ -33,7 +33,7 @@ function addDiscordEmbedFieldForm(updateCode) {
         '<label class="form-check-label" for="inputDiscordEmbedFieldInline' + newIndex + '">' +
         'Inline' +
         '</label>' +
-        '</div>').insertAfter($discordEmbedAddFieldButton);
+        '</div>').insertBefore($discordEmbedAddFieldButton);
     $newElement.find('textarea, input').on('input', function () {
         updateDiscordEmbedCreator(true);
     });

@@ -12,3 +12,6 @@
     margin-bottom: 0.75rem;
     margin-left: 2.5rem;
 }
+.noresize {
+    resize: none;
+}

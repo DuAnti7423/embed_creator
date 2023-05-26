@@ -1,176 +1,460 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/discord.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="stylesheet" href="assets/css/discord.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/clipboard.js"></script>
     <script src="assets/js/jquery-3.6.3.min.js"></script>
     <script src="assets/js/fontawesome.min.js"></script>
     <script src="assets/js/react-element-to-html.js"></script>
     <script src="assets/js/simple-markdown.js"></script>
-    <script src="assets/js/clipboard.js"></script>
-    
-</head>
-<body>
-    <div class="row align-self-center align-items-center">
-        <div class="col-md-6">
-            <h1>Embed Creator</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <form id="discord-embed-form">
-                <div class="form-group">
-                    <label for="inputDiscordEmbedContent">Message Content</label>
-                    <textarea class="form-control form-control-sm" id="inputDiscordEmbedContent" rows="3"></textarea>
+  </head>
+  <body data-bs-theme="dark">
+    <div class="container">
+      <figure class="text-center">
+        <blockquote class="blockquote">
+          <p>Embed Creator</p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+          made for <cite title="Source Title">Corebot</cite>
+        </figcaption>
+      </figure>
+      <form id="discord-embed-form">
+        <div class="row">
+          <div class="col text-center align-items-start">
+            <div class="accordion" id="messageContentAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#messageContentInput"
+                    aria-expanded="true"
+                    aria-controls="messageContentInput"
+                  >
+                    Message Content
+                  </button>
+                </h2>
+                <div
+                  id="messageContentInput"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#messageContentAccordion"
+                >
+                  <div class="accordion-body">
+                    <label for="inputDiscordEmbedContent"
+                      >Message Content</label
+                    >
+                    <textarea
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedContent"
+                      maxlength="2000"
+                      autocomplete="off"
+                      placeholder="Message ..."
+                    ></textarea>
+                  </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="inputDiscordEmbedAuthorName">* Author Name</label>
-                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedAuthorName">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputDiscordEmbedAuthorPicture">Author Picture</label>
-                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedAuthorPicture">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputDiscordEmbedAuthorLink">Author Link</label>
-                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedAuthorLink">
-                    </div>
+              </div>
+            </div>
+            <div class="accordion" id="embedAuthorAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#embedAuthorInput"
+                    aria-expanded="true"
+                    aria-controls="embedAuthorInput"
+                  >
+                    Author
+                  </button>
+                </h2>
+                <div
+                  id="embedAuthorInput"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#embedAuthorAccordion"
+                >
+                  <div class="accordion-body">
+                    <label for="inputDiscordEmbedAuthorName"
+                      >* Author Name</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedAuthorName"
+                      maxlength="256"
+                      autocomplete="off"
+                      placeholder="Author name ..."
+                    />
+                    <label for="inputDiscordEmbedAuthorPicture"
+                      >Author Picture</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedAuthorPicture"
+                      placeholder="Author picture URL ..."
+                    />
+                    <label for="inputDiscordEmbedAuthorLink">Author Link</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedAuthorLink"
+                      placeholder="Author hyperlink ..."
+                    />
+                  </div>
                 </div>
-                <div class="form-group">
+              </div>
+            </div>
+            <div class="accordion" id="embedBodyAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#embedBodyInput"
+                    aria-expanded="true"
+                    aria-controls="embedBodyInput"
+                  >
+                    Body
+                  </button>
+                </h2>
+                <div
+                  id="embedBodyInput"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#embedBodyAccordion"
+                >
+                  <div class="accordion-body">
                     <label for="inputDiscordEmbedTitleText">Title</label>
-                    <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedTitleText">
-                </div>
-                <div class="form-group">
-                    <label for="inputDiscordEmbedDescription">Description</label>
-                    <textarea class="form-control form-control-sm" id="inputDiscordEmbedDescription" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="inputDiscordEmbedThumbnailLink">Thumbnail</label>
-                    <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedThumbnailLink">
-                </div>
-                <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedTitleText"
+                      maxlength="256"
+                      autocomplete="off"
+                      placeholder="Title ..."
+                    />
+                    <label for="inputDiscordEmbedDescription"
+                      >Description</label
+                    >
+                    <textarea
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedDescription"
+                      maxlength="2048"
+                      autocomplete="off"
+                      placeholder="Description ..."
+                    ></textarea>
+                    <label for="inputDiscordEmbedThumbnailLink"
+                      >Thumbnail</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedThumbnailLink"
+                      placeholder="Thumbnail URL ..."
+                    />
                     <label for="inputDiscordEmbedImageLink">Image</label>
-                    <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedImageLink">
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputDiscordEmbedFieldTitle">* Field Title</label>
-                        <input type="text" class="form-control form-control-sm inputDiscordEmbedFieldTitles" id="inputDiscordEmbedFieldTitle">
-                    </div>
-                    <div class="form-group col-md-5">
-                        <label for="inputDiscordEmbedFieldValue">* Field Value</label>
-                        <textarea class="form-control form-control-sm inputDiscordEmbedFieldValues" id="inputDiscordEmbedFieldValue" rows="3"></textarea>
-                    </div>
-                    <div class="form-group col-md-1">
-                        <input class="form-check-input inputDiscordEmbedFieldInlines" type="checkbox" value="" id="inputDiscordEmbedFieldInline" checked>
-                        <label class="form-check-label" for="inputDiscordEmbedFieldInline">
-                            Inline
-                        </label>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-secondary" id="buttonDiscordEmbedAddField"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputDiscordEmbedFooterText">Footer Text</label>
-                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedFooterText">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputDiscordEmbedFooterLink">Footer Icon</label>
-                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedFooterLink">
-                    </div>
-                </div>
-                <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedImageLink"
+                      placeholder="Image URL ..."
+                    />
                     <label for="inputDiscordEmbedColor">Color</label>
-                    <input type="color" class="form-control form-control-sm" id="inputDiscordEmbedColor" value="#4f545c">
+                    <input
+                      type="color"
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedColor"
+                      value="#2f3136"
+                    />
+                  </div>
                 </div>
-            </form>
-        </div>
-        <div class="col-md-6 h-75 w-75">
-            <div class="row">
-                <div class="w-75 h-75 overflow-auto pa2 discord-view">
-                    <div class="flex-vertical whitney theme-dark">
-                        <div class="chat flex-vertical flex-spacer">
-                            <div class="content flex-spacer flex-horizontal">
-                                <div class="flex-spacer flex-vertical messages-wrapper">
-                                    <div class="scroller-wrap">
-                                        <div class="scroller messages">
-                                            <div class="message-group hide-overflow ">
-                                                <div class="avatar-large animate"
-                                                    style="background-image: url('https://cdn.discordapp.com/avatars/718928515378053140/9e14157107e0b3fc0b511a365b0b5a48?size=128');"></div>
-                                                <div class="comment">
-                                                    <div class="message first">
-                                                        <h2 style="line-height: 16px;">
-                                                            <span class="username-wrapper v-btm"><strong class="user-name">Corebot</strong><span class="bot-tag">BOT</span></span><span class="highlight-separator"> - </span><span class="timestamp">Today at 9:08 PM</span>
-                                                        </h2>
-                                                        <div class="message-text"><div class="markup"></div></div>
-                                                    </div>
-                                                    <div class="accessory">
-                                                        <div class="embed-wrapper">
-                                                            <div class="embed-color-pill"></div>
-                                                            <div class="embed embed-rich">
-                                                                <div class="embed-content">
-                                                                    <div class="embed-content-inner">
-                                                                        <div class="embed-author"><img
-                                                                                    src=""
-                                                                                    role="presentation"
-                                                                                    class="embed-author-icon"><a target="_blank"
-                                                                                                                rel="noreferrer"
-                                                                                                                href="https://discordapp.com"
-                                                                                                                class="embed-author-name"></a></div>
-                                                                        <a target="_blank" rel="noreferrer"
-                                                                            href="https://discordapp.com" class="embed-title"></a>
-                                                                        <div class="embed-description markup"></div>
-                                                                        <div class="embed-fields">
-                                                                            <div class="embed-field">
-                                                                                <div class="embed-field-name"></div><div class="embed-field-value markup"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <img src=""
-                                                                        role="presentation" class="embed-rich-thumb"
-                                                                        style="max-width: 80px; max-height: 80px;"></div>
-                                                                <a class="embed-thumbnail embed-thumbnail-rich"><img
-                                                                            class="image" role="presentation"
-                                                                            src=""></a>
-                                                                <div><img src=""
-                                                                            class="embed-footer-icon" role="presentation"
-                                                                            width="20" height="20"><span class="embed-footer"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+              </div>
+            </div>
+            <div class="accordion" id="embedFieldAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#embedFieldInput"
+                    aria-expanded="true"
+                    aria-controls="embedFieldInput"
+                  >
+                    Field
+                  </button>
+                </h2>
+                <div
+                  id="embedFieldInput"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#embedFieldAccordion"
+                >
+                  <div class="accordion-body">
+                    <label for="inputDiscordEmbedFieldTitle"
+                      >* Field Title</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control form-control-sm inputDiscordEmbedFieldTitles"
+                      id="inputDiscordEmbedFieldTitle"
+                      maxlength="256"
+                      autocomplete="off"
+                      placeholder="Field title ..."
+                    />
+                    <label for="inputDiscordEmbedFieldValue"
+                      >* Field Value</label
+                    >
+                    <textarea
+                      class="form-control form-control-sm inputDiscordEmbedFieldValues"
+                      id="inputDiscordEmbedFieldValue"
+                      maxlength="1024"
+                      autocomplete="off"
+                      placeholder="Field value ..."
+                    ></textarea>
+                    <input
+                      class="form-check-input inputDiscordEmbedFieldInlines"
+                      type="checkbox"
+                      value=""
+                      id="inputDiscordEmbedFieldInline"
+                      checked
+                    />
+                    <label
+                      class="form-check-label"
+                      for="inputDiscordEmbedFieldInline"
+                    >
+                      Inline
+                    </label>
+                    <button
+                      type="button"
+                      class="btn btn-primary visually-hidden"
+                      id="buttonDiscordEmbedAddField1"
+                    >
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="buttonDiscordEmbedAddField"
+                  >
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="accordion" id="embedFooterAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#embedFooterInput"
+                    aria-expanded="true"
+                    aria-controls="embedFooterInput"
+                  >
+                    Footer
+                  </button>
+                </h2>
+                <div
+                  id="embedFooterInput"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#embedFooterAccordion"
+                >
+                  <div class="accordion-body">
+                    <label for="inputDiscordEmbedFooterText">Footer Text</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedFooterText"
+                      maxlength="2048"
+                      autocomplete="off"
+                      placeholder="Footer text ..."
+                    />
+                    <label for="inputDiscordEmbedFooterLink">Footer Icon</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      id="inputDiscordEmbedFooterLink"
+                      placeholder="Footer icon url ..."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion" id="embedCpdeAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#embedCodeInput"
+                    aria-expanded="true"
+                    aria-controls="embedCpdeInput"
+                  >
+                    Embed Code
+                  </button>
+                </h2>
+                <div
+                  id="embedCodeInput"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#embedFooterAccordion"
+                >
+                  <div class="accordion-body">
+                    <label for="outputEmbedCode">Embed Code</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      id="outputEmbedCode"
+                      rows="6"
+                      data-command-prefix="_embed #channel "
+                    ></textarea>
+                    <small class="form-text text-muted"
+                      >You can also paste your embed code here to edit
+                      it.</small
+                    >
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-primary clipboard-button"
+                    data-clipboard-target="#outputEmbedCode"
+                  >
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="col-md-6 h-75 w-75">
+              <div class="row">
+                <div class="w-75 h-75overflow-auto pa2 discord-view">
+                  <div class="flex-vertical whitney theme-dark">
+                    <div class="chat flex-vertical flex-spacer">
+                      <div class="content flex-spacer flex-horizontal">
+                        <div class="flex-spacer flex-vertical messages-wrapper">
+                          <div class="scroller-wrap">
+                            <div class="scroller messages">
+                              <div class="message-group hide-overflow">
+                                <div
+                                  class="avatar-large animate"
+                                  style="
+                                    background-image: url('https://cdn.discordapp.com/avatars/718928515378053140/9e14157107e0b3fc0b511a365b0b5a48?size=128');
+                                  "
+                                ></div>
+                                <div class="comment">
+                                  <div class="message first">
+                                    <h2 style="line-height: 16px">
+                                      <span class="username-wrapper v-btm"
+                                        ><strong class="user-name"
+                                          >Corebot</strong
+                                        ><span class="bot-tag">BOT</span></span
+                                      ><span class="highlight-separator">
+                                        - </span
+                                      ><span class="timestamp"
+                                        >Today at 9:08 PM</span
+                                      >
+                                    </h2>
+                                    <div class="message-text">
+                                      <div class="markup"></div>
                                     </div>
+                                  </div>
+                                  <div class="accessory">
+                                    <div class="embed-wrapper">
+                                      <div class="embed-color-pill"></div>
+                                      <div class="embed embed-rich">
+                                        <div class="embed-content">
+                                          <div class="embed-content-inner">
+                                            <div class="embed-author">
+                                              <img
+                                                src=""
+                                                role="presentation"
+                                                class="embed-author-icon"
+                                              /><a
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                href="https://discordapp.com"
+                                                class="embed-author-name"
+                                              ></a>
+                                            </div>
+                                            <a
+                                              target="_blank"
+                                              rel="noreferrer"
+                                              href="https://discordapp.com"
+                                              class="embed-title"
+                                            ></a>
+                                            <div
+                                              class="embed-description markup"
+                                            ></div>
+                                            <div class="embed-fields">
+                                              <div class="embed-field">
+                                                <div
+                                                  class="embed-field-name"
+                                                ></div>
+                                                <div
+                                                  class="embed-field-value markup"
+                                                ></div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <img
+                                            src=""
+                                            role="presentation"
+                                            class="embed-rich-thumb"
+                                            style="
+                                              max-width: 80px;
+                                              max-height: 80px;
+                                            "
+                                          />
+                                        </div>
+                                        <a
+                                          class="embed-thumbnail embed-thumbnail-rich"
+                                          ><img
+                                            class="image"
+                                            role="presentation"
+                                            src=""
+                                        /></a>
+                                        <div>
+                                          <img
+                                            src=""
+                                            class="embed-footer-icon"
+                                            role="presentation"
+                                            width="20"
+                                            height="20"
+                                          /><span class="embed-footer"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
+                              </div>
                             </div>
+                          </div>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
+              <div class="row">
+                <p>
+                  You can mask links like this:
+                  <code>[example](https://example.org)</code>.
+                </p>
+              </div>
             </div>
-            <div class="row">
-                <p>You can mask links like this: <code>[example](https://example.org)</code>.</p>
-            </div>
+          </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <label for="outputEmbedCode">Embed Code <button type="button" class="btn btn-primary clipboard-button" data-clipboard-target="#outputEmbedCode"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy</button></label>
-            <textarea class="form-control form-control-sm" id="outputEmbedCode" rows="3" data-command-prefix="_embed #channel "></textarea>
-            <small class="form-text text-muted">You can also paste your embed code here to edit it.</small>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <p class="embed-creator-footer">This site uses resources from <a href="https://github.com/leovoel/embed-visualizer" target="_blank">github.com/leovoel/embed-visualizer</a>.</p>
-        </div>
+      </form>
     </div>
     <script src="assets/js/main.js"></script>
-</body>
+  </body>
 </html>

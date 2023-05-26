@@ -1,6 +1,5 @@
-new Clipboard('.clipboard-button');
+new ClipboardJS('.clipboard-button');
 let $discordEmbedForm = $('#discord-embed-form');
-console.log(typeof $discordEmbedForm)
 if (typeof $discordEmbedForm !== 'undefined' && $discordEmbedForm.length > 0) {
     updateDiscordEmbedCreator(true);
     $('#discord-embed-form textarea, #discord-embed-form input').on('input', function () {
@@ -22,24 +21,19 @@ if (typeof $discordOutputForm !== 'undefined' && $discordOutputForm.length > 0) 
 };
 
 function addDiscordEmbedFieldForm(updateCode) {
-    let $discordEmbedAddFieldButton = $('#buttonDiscordEmbedAddField');
+    let $discordEmbedAddFieldButton = $('#buttonDiscordEmbedAddField1');
     let newIndex = $('.embed-field').length;
-    let $newElement = $('<div class="form-row">' +
-        '<div class="form-group col-md-6">' +
+    let $newElement = $(
+        '<div>' +
         '<label for="inputDiscordEmbedFieldTitle' + newIndex + '">Field Title</label>' +
-        '<input type="text" class="form-control form-control-sm inputDiscordEmbedFieldTitles" id="inputDiscordEmbedFieldTitle' + newIndex + '">' +
-        '</div>' +
-        '<div class="form-group col-md-5">' +
+        '<input type="text" class="form-control form-control-sm inputDiscordEmbedFieldTitles" id="inputDiscordEmbedFieldTitle' + newIndex + '" maxlength="256" autcomplete="off" placeholder="Field title ...">' +
         '<label for="inputDiscordEmbedFieldValue' + newIndex + '">Field Value</label>' +
-        '<textarea class="form-control form-control-sm inputDiscordEmbedFieldValues" id="inputDiscordEmbedFieldValue' + newIndex + '" rows="3"></textarea>' +
-        '</div>' +
-        '<div class="form-group col-md-1">' +
+        '<textarea class="form-control form-control-sm inputDiscordEmbedFieldValues" id="inputDiscordEmbedFieldValue' + newIndex + '" maxlength="1024" autocomplete="off" placeholder="Field value ..."></textarea>' +
         '<input class="form-check-input inputDiscordEmbedFieldInlines" type="checkbox" value="" id="inputDiscordEmbedFieldInline' + newIndex + '" checked>' +
         '<label class="form-check-label" for="inputDiscordEmbedFieldInline' + newIndex + '">' +
         'Inline' +
         '</label>' +
-        '</div>' +
-        '</div>').insertBefore($discordEmbedAddFieldButton);
+        '</div>').insertAfter($discordEmbedAddFieldButton);
     $newElement.find('textarea, input').on('input', function () {
         updateDiscordEmbedCreator(true);
     });
@@ -303,7 +297,7 @@ function importDiscordEmbedCreator() {
     });
 
     if (color.length <= 0) {
-        color = '#4f545c';
+        color = '#2f3136';
     }
 
     $('#inputDiscordEmbedContent').val(messageContent);

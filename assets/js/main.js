@@ -342,4 +342,7 @@ function parseDiscordMarkdown(inputText) {
     var mdOutput = SimpleMarkdown.defaultOutput;
     var syntaxTree = mdParse(inputText);
     return convert(mdOutput(syntaxTree)[0]);
-}
+};
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});

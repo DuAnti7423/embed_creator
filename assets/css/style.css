@@ -15,3 +15,13 @@
 .noresize {
     resize: none;
 }
+a {
+    text-decoration: none;
+    color: #0dcaf0;
+}
+a:hover{
+    text-decoration: none;
+}
+code {
+    color: #0dcaf0;
+}

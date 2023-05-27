@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
+    <title>Embed Creator</title>
     <link rel="stylesheet" href="assets/css/discord.css" />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/avatars/718928515378053140/9e14157107e0b3fc0b511a365b0b5a48?size=128" />
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/clipboard.js"></script>
     <script src="assets/js/jquery-3.6.3.min.js"></script>
@@ -21,7 +23,8 @@
           <p>Embed Creator</p>
         </blockquote>
         <figcaption class="blockquote-footer">
-          made for <cite title="Source Title">Corebot</cite>
+
+          made for <cite title="Source Title"><a href="https://builtbybit.com/resources/corebot-multi-purpose-discord-bot.8501/" target="_blank">Corebot</a></cite>
         </figcaption>
       </figure>
       <form id="discord-embed-form">
@@ -235,7 +238,10 @@
                     <div class="col-12">
                       <button
                         type="button"
-                        class="btn btn-primary"
+                        class="btn btn-dark"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Add field"
                         id="buttonDiscordEmbedAddField"
                       >
                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -279,7 +285,7 @@
                       type="text"
                       class="form-control form-control-sm"
                       id="inputDiscordEmbedFooterLink"
-                      placeholder="Footer icon url ..."
+                      placeholder="Footer icon URL ..."
                     />
                   </div>
                 </div>
@@ -319,10 +325,13 @@
                   </div>
                   <button
                     type="button"
-                    class="btn btn-primary clipboard-button"
+                    class="btn btn-dark clipboard-button"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Copy"
                     data-clipboard-target="#outputEmbedCode"
                   >
-                    <i class="fa fa-clipboard" aria-hidden="true"></i>Copy
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
                   </button>
                 </div>
               </div>
